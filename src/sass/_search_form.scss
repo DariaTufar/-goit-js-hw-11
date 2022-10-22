@@ -18,7 +18,7 @@
   border-radius: 2px;
 }
 
-.example .background {
+.img_background_container {
   height: 240px;
   // ❗️❗️❗️ The path to images from a SASS file
   // is always the same as from the css folder.
@@ -34,10 +34,15 @@
   width: 70%;
 }
 
-.search-box {
+.search-form {
   width: 500px;
   position: relative;
   top: 10px;
   left: 0;
   border-radius: 10px;
+  color: #00ffff;
+}
+
+.search__header {
+    color: #00ffff;
 }
