@@ -12,15 +12,15 @@ const DEBOUNCE_DELAY = 500;
 const refs = {
   form: document.querySelector(`.search-form`),
   searchBtn: document.querySelector(`.searchBtn`),
-  loadMore: document.querySelector(`.loadMore`),
+  loadMoreBtn: document.querySelector(`.loadMore`),
   galleryEl: document.querySelector(`.gallery`),
 };
 
 console.log(refs.galleryEl);
-refs.loadMore.setAttribute(`hidden`, true);
+refs.loadMoreBtn.setAttribute(`hidden`, true);
 
 refs.form.addEventListener(`submit`, onSubmitSearchInfo);
-refs.loadMore.addEventListener(`click`, onBtnClick);
+// refs.loadMoreBtn.addEventListener(`click`, onBtnClick);
 
 async function onSubmitSearchInfo(evt) {
   evt.preventDefault();
@@ -46,7 +46,6 @@ async function onSubmitSearchInfo(evt) {
     } else {
       Notiflix.Notify.success(`Hooray! We found ${response.totalHits} images.`);
       renderMarkup(response.hits);
-      // createGalleryMarkup(response.hits);
     }
   } catch (error) {
     console.log(error.message);
@@ -55,6 +54,24 @@ async function onSubmitSearchInfo(evt) {
 
 async function onBtnClick() {
   searchQuery.page += 1;
+
+  const response = await SearchQuery.searchPic();
+  if (SearchQuery.page > response.totalHits / SearchQuery.per_page) {
+    Notiflix.Notify.failure(
+      `We're sorry, but you've reached the end of search results.`
+    );
+    //  refs.loadMoreBtn.setAttribute(`hidden`, true);
+  }
+
+  renderMarkup(response.hits);
+  //  refs.loadMoreBtn.removeAttribute(`hidden`);
+  const { height: cardHeight } =
+    refs.galleryEl.firstChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: `smooth,`,
+  });
 }
 
 const lightbox = new SimpleLightbox('.gallery a', {
@@ -66,18 +83,5 @@ const lightbox = new SimpleLightbox('.gallery a', {
 function renderMarkup(arr) {
   refs.galleryEl.insertAdjacentHTML(`beforeend`, createGalleryMarkup(arr));
   lightbox.refresh();
+  //  refs.loadMoreBtn.removeAttribute(`hidden`);
 }
-// -------------------------------------------------------evt listeners
-// form.addEventListener(`input`, onInput);
-// searchBtn.addEventListener(`click`, onSearch)
-// -----------------------------------------------------------
-// function onSearch(evt) {
-//     evt.preventDefault()
-// }
-
-// function onInput(evt) {
-//     evt.preventDefault();
-//     const searchTerm = evt.target.value.trim();
-//     console.log(searchTerm);
-
-//
