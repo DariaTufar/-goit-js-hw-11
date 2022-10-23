@@ -1,26 +1,23 @@
-import debounce from 'lodash.debounce';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import Notiflix from 'notiflix';
-import { SearchQuery } from './js/search';
-import axios from 'axios';
 
+import { SearchQuery } from './js/search';
 import { createGalleryMarkup } from '/src/js/createGalleryMarkup';
 
-const DEBOUNCE_DELAY = 500;
+import 'animate.css';
 
 const refs = {
-  form: document.querySelector(`.search-form`),
-  searchBtn: document.querySelector(`.searchBtn`),
-  loadMoreBtn: document.querySelector(`.loadMore`),
-  galleryEl: document.querySelector(`.gallery`),
+  form: document.querySelector(`.js-search-form`),
+  searchBtn: document.querySelector(`.js-submit__search_btn`),
+  loadMoreBtn: document.querySelector(`.js-loadMore`),
+  galleryEl: document.querySelector(`.js-gallery`),
 };
 
-console.log(refs.galleryEl);
-refs.loadMoreBtn.setAttribute(`hidden`, true);
+refs.loadMoreBtn.setAttribute(`hidden`, true);  //  hide a button in case of change from infinite scroll to a Loadmore 
 
-refs.form.addEventListener(`submit`, onSubmitSearchInfo);
-// refs.loadMoreBtn.addEventListener(`click`, onBtnClick);
+refs.form.addEventListener(`submit`, onSubmitSearchInfo); 
+refs.loadMoreBtn.addEventListener(`click`, onBtnClick);
 
 async function onSubmitSearchInfo(evt) {
   evt.preventDefault();
@@ -30,7 +27,6 @@ async function onSubmitSearchInfo(evt) {
   const query = evt.target.elements.searchQuery.value.trim();
 
   const response = await SearchQuery.searchPic(query);
-  console.log(response);
   const galleryItem = response.hits;
 
   try {
@@ -53,25 +49,26 @@ async function onSubmitSearchInfo(evt) {
 }
 
 async function onBtnClick() {
-  searchQuery.page += 1;
+  SearchQuery.page += 1;
 
   const response = await SearchQuery.searchPic();
   if (SearchQuery.page > response.totalHits / SearchQuery.per_page) {
     Notiflix.Notify.failure(
       `We're sorry, but you've reached the end of search results.`
     );
-    //  refs.loadMoreBtn.setAttribute(`hidden`, true);
+    // refs.loadMoreBtn.setAttribute(`hidden`, true);   // for LoadMore button
   }
 
   renderMarkup(response.hits);
-  //  refs.loadMoreBtn.removeAttribute(`hidden`);
-  const { height: cardHeight } =
-    refs.galleryEl.firstChild.getBoundingClientRect();
+  // refs.loadMoreBtn.removeAttribute(`hidden`);  // for LoadMore button
 
-  window.scrollBy({
-    top: cardHeight * 2,
-    behavior: `smooth,`,
-  });
+  const { height: cardHeight } =  //   for infinite scroll
+    refs.galleryEl.firstChild.getBoundingClientRect();//  for infinite scroll
+
+  window.scrollBy({       //for infinite scroll
+    top: cardHeight * 2, //for infinite scroll
+    behavior: `smooth,`, //for infinite scroll
+  }); //for infinite scroll
 }
 
 const lightbox = new SimpleLightbox('.gallery a', {
@@ -81,7 +78,8 @@ const lightbox = new SimpleLightbox('.gallery a', {
 });
 
 function renderMarkup(arr) {
+  
   refs.galleryEl.insertAdjacentHTML(`beforeend`, createGalleryMarkup(arr));
   lightbox.refresh();
-  //  refs.loadMoreBtn.removeAttribute(`hidden`);
+  // refs.loadMoreBtn.removeAttribute(`hidden`); // for LoadMore button
 }

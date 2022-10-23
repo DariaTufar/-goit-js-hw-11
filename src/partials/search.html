@@ -1,30 +1,42 @@
- 
-  <h1 class="search__header"> Cool Image Super Search</h1>
 
-  <!--
-    ❗️❗️❗️ The path to images from the HTML partial
-    is the same as from the index.html file
-  -->
 
-  <section  class="hero">
-   <div class="container, img_background_container">
+  <section  class="hero, " >
+    <div class="container">
+
+    <div class="search__header">
+      <h1 class="header-text animate__animated animate__pulse"> Cool Image Super Search</h1>
+</div>
+    <div class="search__form, search__background_container">
  
- <form class="search-form" id="search-form">
-  <input
+    <form class="js-search-form search__form-input" id="js-search-form">
+    <input
     type="text"
     name="searchQuery"
     autocomplete="off"
     placeholder="Search images..."
   />
-  <button type="submit" class="searchBtn">Search</button>
-</form>
-  
  
-  <div class="gallery">
-  <!-- Image cards -->
+  <button type="submit" class="js-submit__search_btn button animate__animated animate__fadeIn">
+      <svg class="icon icon-search"><use href="./images/search.svg#icon-search">
+      </use>Search</button>
+</form>
 </div>
+</div>
+</section>
+ 
+<section class= "gallery"  >
+  
+    <ul class ="js-gallery gallery">
+  <!-- Image cards -->
+  </ul>
+  <div class="load_moreBtn">
+ <button type="button" class="js-loadMore button">
+  <svg class="icon icon-search"><use href="./images/search.svg#icon-search"></use></svg>
+  Load More   </button>
+</div>
+ 
+</section>
 
- <button type="button" class="loadMore">Load More</button>
 
 
 </section>

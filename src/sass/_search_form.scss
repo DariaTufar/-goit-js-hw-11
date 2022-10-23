@@ -1,48 +1,118 @@
-.example {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  line-height: 1.5;
-  background-color: #fff;
-  color: #2f2f37;
-  max-width: 960px;
-  padding: 16px;
+
+:root {
+    --primary-color:#051c84; ;
+     
+    --accent-color:#440347 ;
+      
+}
+.search__header {
+  color: var(--primary-color);
+
+  display: flex;
+
+  justify-content: space-around;
 }
 
-.example code {
-  font-family: monospace;
-  font-size: 16px;
-  font-weight: 700;
-  background-color: #ff6b0a;
-  color: #fff;
-  padding: 2px 6px;
-  border-radius: 2px;
-}
-
-.img_background_container {
-  height: 240px;
+.search__background_container {
+  height: 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
   // ❗️❗️❗️ The path to images from a SASS file
   // is always the same as from the css folder.
   background-image: url('../images/marble_blue_horiz.png');
   background-size: cover;
   background-position: center;
   opacity: 0.6;
-  position: absolute;
-}
-
-.background_marble {
-  opacity: 0.7;
-  width: 70%;
-}
-
-.search-form {
-  width: 500px;
-  position: relative;
-  top: 10px;
-  left: 0;
+  justify-content: space-around;
   border-radius: 10px;
-  color: #00ffff;
+  opacity: 0.7;
+  padding: 20px;
 }
 
-.search__header {
-    color: #00ffff;
+.search__form {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 20px;
+  padding-bottom: 20px;
+  font-size: 1.5rem;
+  display: flex;
+
+  border-radius: 10px;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+.button {
+  color:var(--primary-color);
+
+  &:hover {
+    background-color: var(--accent-color) ;
+    border:var(--primary-color);
+  }
+}
+
+.gallery {
+  max-width: 1600px;
+  padding: 0 30px;
+  display: flex;
+
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+  margin: 80px 20px 0 20px;
+}
+
+.gallery__item {
+  display: flex;
+  flex-direction: row;
+
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+
+  justify-content: center;
+  border-radius: 10px;
+  padding: 10px 0;
+  color:  var(--accent-color) ;
+}
+
+.gallery__item-img {
+  width: 350px;
+  height: 240px;
+  object-fit: cover;
+  max-width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+.info__list {
+  display: flex;
+  flex-direction: row;
+  font-size: 11px;
+
+  padding: 10px 0;
+  justify-content: space-around;
+
+  align-items: center;
+  border-radius: 10px;
+}
+.info__list-item {
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+  width: 30px;
+  text-align: center;
+  color:  var(--accent-color) ;
 }
