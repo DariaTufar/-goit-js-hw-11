@@ -22,6 +22,7 @@ export function createGalleryMarkup(arr) {
       <b>Downloads ${downloads}</b> 
     </li>
   </ul>
- </a> </div>`
+ </a> </div>`,
+    ''
   );
 }

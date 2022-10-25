@@ -1,9 +1,7 @@
-
 :root {
-    --primary-color:#051c84; ;
-     
-    --accent-color:#440347 ;
-      
+  --primary-color: #051c84;
+
+  --accent-color: #440347;
 }
 .search__header {
   color: var(--primary-color);
@@ -53,13 +51,16 @@
   stroke-width: 0;
   stroke: currentColor;
   fill: currentColor;
+  .search__button:hover & {
+    fill: white;
+  }
 }
-.button {
-  color:var(--primary-color);
+.search__button {
+  color: var(--primary-color);
 
   &:hover {
-    background-color: var(--accent-color) ;
-    border:var(--primary-color);
+    background-color: var(--accent-color);
+    border: var(--primary-color);
   }
 }
 
@@ -83,7 +84,7 @@
   justify-content: center;
   border-radius: 10px;
   padding: 10px 0;
-  color:  var(--accent-color) ;
+  color: var(--accent-color);
 }
 
 .gallery__item-img {
@@ -114,5 +115,5 @@
   gap: 5px;
   width: 30px;
   text-align: center;
-  color:  var(--accent-color) ;
+  color: var(--accent-color);
 }
