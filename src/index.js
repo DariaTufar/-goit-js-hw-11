@@ -14,9 +14,9 @@ const refs = {
   galleryEl: document.querySelector(`.js-gallery`),
 };
 
-refs.loadMoreBtn.setAttribute(`hidden`, true);  //  hide a button in case of change from infinite scroll to a Loadmore 
+refs.loadMoreBtn.setAttribute(`hidden`, true); //  hide a button in case of change from infinite scroll to a Loadmore
 
-refs.form.addEventListener(`submit`, onSubmitSearchInfo); 
+refs.form.addEventListener(`submit`, onSubmitSearchInfo);
 refs.loadMoreBtn.addEventListener(`click`, onBtnClick);
 
 async function onSubmitSearchInfo(evt) {
@@ -26,11 +26,10 @@ async function onSubmitSearchInfo(evt) {
 
   const query = evt.target.elements.searchQuery.value.trim();
 
-  const response = await SearchQuery.searchPic(query);
-  const galleryItem = response.hits;
-
   try {
     refs.galleryEl.innerHTML = ``;
+    const response = await SearchQuery.searchPic(query);
+    const galleryItem = response.hits;
     if (galleryItem.length === 0) {
       Notiflix.Notify.info(
         'Sorry, there are no images matching your search query. Please try again.'
@@ -62,10 +61,12 @@ async function onBtnClick() {
   renderMarkup(response.hits);
   // refs.loadMoreBtn.removeAttribute(`hidden`);  // for LoadMore button
 
-  const { height: cardHeight } =  //   for infinite scroll
-    refs.galleryEl.firstChild.getBoundingClientRect();//  for infinite scroll
+  const {
+    height: cardHeight,
+  } = refs.galleryEl.firstChild.getBoundingClientRect(); //   for infinite scroll //  for infinite scroll
 
-  window.scrollBy({       //for infinite scroll
+  window.scrollBy({
+    //for infinite scroll
     top: cardHeight * 2, //for infinite scroll
     behavior: `smooth,`, //for infinite scroll
   }); //for infinite scroll
@@ -78,7 +79,6 @@ const lightbox = new SimpleLightbox('.gallery a', {
 });
 
 function renderMarkup(arr) {
-  
   refs.galleryEl.insertAdjacentHTML(`beforeend`, createGalleryMarkup(arr));
   lightbox.refresh();
   // refs.loadMoreBtn.removeAttribute(`hidden`); // for LoadMore button
